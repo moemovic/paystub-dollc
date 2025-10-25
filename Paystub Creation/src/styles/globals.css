@@ -1,155 +1,60 @@
-/* paystub.css
-   Approximation of Tailwind utilities used in your component.
-   Save and import with: `import "./paystub.css";`
-*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Basic variables (edit to taste) */
-:root{
-  --bg: #f8fafc;            /* slate-50 */
-  --muted: #475569;         /* slate-600 */
-  --text: #0f172a;          /* slate-900-ish */
-  --card-bg: #ffffff;
-  --shadow: 0 6px 18px rgba(2,6,23,0.08);
-  --radius-xl: 1rem;        /* 16px */
-  --radius-md: 0.5rem;      /* 8px */
-  --gap: 1rem;              /* 16px */
-  --gap-sm: 0.5rem;         /* 8px */
-  --font-base: 16px;
+/* small custom styling to match the example */
+html, body, #__next {
+  height: 100%;
+  background-color: #f8fafc; /* slate-50 */
+}
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+/* quick fallback styles (temporary) */
+:root {
+  --bg: #f8fafc;
+  --muted: #6b7280;
+  --card-bg: #fff;
+  --card-border: #eef2f7;
+  --accent: #0f172a;
 }
 
-/* Layout & common utilities */
-html,body,#root { height:100%; }
-body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:var(--text); font-size:var(--font-base); margin:0; }
+html,body,#__next { height:100%; margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--accent); }
 
-.app-root { padding: 1.5rem; background: var(--bg); min-height: 100vh; box-sizing: border-box; }
-.container { max-width: 80rem; margin: 0 auto; } /* max-w-5xl ~ 80rem is high; adjust if needed */
-.row { display:flex; align-items:center; gap: 1rem; }
-.logo { height: 4rem; } /* h-16 -> 64px, use 4rem = 64px */
-.header-title { font-size: 1.875rem; font-weight:700; margin:0; } /* text-3xl */
-.header-sub { color: var(--muted); margin:0; font-size:0.95rem; }
+.container { max-width:1100px; margin:0 auto; padding:24px; }
+.p-6 { padding:24px; }
+.bg-slate-50 { background:var(--bg); }
 
-/* Grid 3 columns */
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
-
-/* Card approximation */
+.card, .card * { box-sizing:border-box; }
 .card {
+  @apply bg-white rounded-xl shadow-sm p-4;
   background: var(--card-bg);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow);
-  overflow: visible;
-  display:block;
+  border-radius: .75rem;
+  padding: 16px;
+  box-shadow: 0 1px 2px rgba(2,6,23,0.04);
+  border: 1px solid var(--card-border);
 }
-.card + .card { margin-top: 1rem; }
-.card-header { padding: 0.75rem 1rem; display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid #eef2f6; }
-.card-title { font-weight:600; font-size:1rem; }
-.card-content { padding: 0.75rem 1rem; }
-
-/* Buttons */
-.btn {
-  display:inline-flex;
-  align-items:center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
-  background: #0ea5a2; /* teal-ish default - change if you use Button component styling */
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-weight:600;
-}
-.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.6; cursor: not-allowed; }
-.btn-icon { padding: 0.4rem; height: 2.25rem; width: 2.25rem; display:inline-flex; justify-content:center; align-items:center; }
-
-/* ghost button (like variant="ghost") */
-.btn-ghost {
-  background: transparent;
-  color: var(--muted);
-  border: 1px solid transparent;
-}
-
-/* Inputs & labels */
-.label { display:block; font-size: 0.875rem; margin-bottom: 0.25rem; color: var(--muted); }
-.input, input[type="date"], select, textarea {
-  width: 100%;
-  padding: 0.5rem 0.625rem;
-  border-radius: 0.375rem;
-  border: 1px solid #dbe6ee;
-  font-size: 0.95rem;
-  box-sizing: border-box;
-}
-.input:focus, select:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(14,165,162,0.12);
-  border-color: #0ea5a2;
-}
-
-/* small text helper */
-.text-xs { font-size: 0.8rem; }
-.text-sm { font-size: 0.95rem; }
-.text-right { text-align: right; }
-.font-medium { font-weight: 600; }
-
-/* Earnings list layout */
-.earnings-list { margin-top: 0.5rem; }
-.earnings-row {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 0.5rem;
-  padding: 0.5rem 0;
-  align-items: start;
-  border-bottom: 1px solid #eef2f6;
-}
-.col-span-4 { grid-column: span 4 / span 4; }
-.col-span-2 { grid-column: span 2 / span 2; }
-.col-span-1 { grid-column: span 1 / span 1; }
-.col-span-8 { grid-column: span 8 / span 8; }
-.col-span-12 { grid-column: span 12 / span 12; }
-
-/* small utility classes used inside earnings rows */
-.small-note { font-size:0.85rem; color:var(--muted); }
-.remove-btn { background: transparent; border: none; cursor: pointer; }
-
-/* Preview pay stub styles */
-.printable {
-  background: var(--card-bg);
-  box-shadow: var(--shadow);
-  border-radius: var(--radius-xl);
-  padding: 1.5rem;
-  margin-top: 2rem;
-}
-.printable .top-row { display:flex; justify-content:space-between; align-items:center; gap: 1rem; }
-.printable .logo { height: 3rem; } /* h-12 */
-.printable h2 { margin-top: 1rem; margin-bottom: 0.5rem; font-size: 1.125rem; font-weight:700; }
-
-/* Table used in preview */
-.pay-table { width:100%; margin-top:1rem; border-collapse: collapse; font-size: 0.95rem; }
-.pay-table thead th { color: var(--muted); text-align:left; padding: 0.5rem 0; border-bottom: 1px solid #eef2f6; }
-.pay-table tbody td { padding: 0.6rem 0; vertical-align: middle; }
-.pay-table .amount { text-align: right; font-weight:600; }
-
-/* Totals block */
-.totals { text-align: right; margin-top:1rem; }
-.totals div { margin-bottom: 0.25rem; }
-.net-pay { font-size: 1.125rem; font-weight:700; }
-
-/* small helpers */
+.small { font-size: 0.9rem; color: #6b7280; }
 .mt-2 { margin-top: 0.5rem; }
-.mt-4 { margin-top: 1rem; }
-.mt-6 { margin-top: 1.5rem; }
-.mb-1 { margin-bottom: 0.25rem; }
 .mb-2 { margin-bottom: 0.5rem; }
 
-/* aria-busy loader indicator (small icon spin) */
-.loader { display:inline-block; vertical-align: middle; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.loader.spin { animation: spin 1s linear infinite; }
+.grid { display:grid; gap:16px; }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
 
-/* accessibility & state */
-[aria-disabled="true"], .disabled { opacity:0.6; pointer-events:none; }
-
-/* responsive adjustments (basic) */
-@media (max-width: 900px) {
-  .grid-3 { grid-template-columns: 1fr; }
-  .row { flex-direction: row; gap: 0.75rem; }
-  .container { padding: 1rem; }
+.input, input, select, textarea {
+  width:100%;
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #e6edf3;
 }
+
+h1 { font-size:28px; font-weight:700; margin:0 0 6px 0; }
+.text-slate-600 { color:var(--muted); }
+
+/* helper */
+.mt-6 { margin-top:24px; }
+.mt-8 { margin-top:32px; }
+.mb-2 { margin-bottom:8px; }
+.text-right { text-align:right; }
+.font-bold { font-weight:700; }
