@@ -1,30 +1,20 @@
-html,body,#__next {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* small custom styling to match the example */
+html, body, #__next {
   height: 100%;
-  margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: #f8fafc;
-  color: #0f172a;
+  background-color: #f8fafc; /* slate-50 */
 }
-.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-.card { background: white; border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-button { cursor: pointer; }
-input, select { padding: 8px; border: 1px solid #e2e8f0; border-radius: 6px; }
-.small { font-size: 13px; color: #475569; }
-.mt-2 { margin-top: 8px; }
-.mb-2 { margin-bottom: 8px; }
-.flex { display:flex; }
-.justify-between { justify-content: space-between; }
-.items-center { align-items: center; }
-.grid { display: grid; gap: 8px; }
-.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-cols-12 { grid-template-columns: repeat(12, 1fr); }
-.col-span-4 { grid-column: span 4 / span 4; }
-.col-span-2 { grid-column: span 2 / span 2; }
-.col-span-1 { grid-column: span 1 / span 1; }
-.text-right { text-align: right; }
-.font-bold { font-weight: 700; }
-.text-xl { font-size: 20px; }
-.text-3xl { font-size: 28px; }
-.p-6 { padding: 24px; }
-.rounded-xl { border-radius: 12px; }
-.shadow { box-shadow: 0 6px 18px rgba(2,6,23,0.08);}
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.card {
+  @apply bg-white rounded-xl shadow-sm p-4;
+}
+.small { font-size: 0.9rem; color: #6b7280; }
+.mt-2 { margin-top: 0.5rem; }
+.mb-2 { margin-bottom: 0.5rem; }
