@@ -70,7 +70,7 @@ export default function PayStubApp() {
   return (
     <div className="container p-6">
       <div className="flex items-center gap-4">
-        <img src="/public/logo.png" alt="Logo" style={{height:56}} />
+        <img src="/logo.png" alt="Logo" style={{height:56}} />
         <div>
           <h1 className="text-3xl font-bold">DOLLC Contractor Pay Stub Generator</h1>
           <p className="small">Relationship built on duty and trust</p>
