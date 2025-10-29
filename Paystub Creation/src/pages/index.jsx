@@ -70,7 +70,16 @@ export default function PayStubApp() {
   return (
     <div className="container p-6">
       <div className="flex items-center gap-4">
-        <img src="/public/logo.png" alt="DOLLC Logo" style={{height:56}} />
+        <img
+  src={"data:image/svg+xml;utf8," + encodeURIComponent(`
+    <svg xmlns='http://www.w3.org/2000/svg' width='240' height='56' viewBox='0 0 240 56'>
+      <rect fill='#f8fafc' width='100%' height='100%'/>
+      <text x='8' y='36' font-family='Inter, Arial, sans-serif' font-size='28' font-weight='700' fill='#0f172a'>DOLLC</text>
+    </svg>
+  `)}
+  alt="DOLLC Logo"
+  style={{height:56}}
+/>
         <div>
           <h1 className="text-3xl font-bold">DOLLC Contractor Pay Stub Generator</h1>
           <p className="small">Relationship built on duty and trust</p>
