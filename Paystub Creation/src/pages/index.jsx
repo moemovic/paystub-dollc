@@ -49,17 +49,68 @@ export default function PayStubApp() {
     return { earnings, mileage, total };
   }, [items]);
 
+  // ===== Optimized exportPDF: smaller output by using JPEG + modest scale + pagination =====
   const exportPDF = async () => {
+    // prevent re-entry
+    if (busy) return;
+
     try {
       setBusy(true);
       const node = printableRef.current;
-      const canvas = await html2canvas(node, { scale: 2, backgroundColor: "#ffffff" });
-      const imgData = canvas.toDataURL("image/png");
+      if (!node) {
+        alert("Preview not ready yet. Please wait a moment and try again.");
+        return;
+      }
+
+      // Render at modest resolution; scale 1.0-1.2 balances quality vs size.
+      // If you need even smaller files, reduce scale (e.g., 1.0) or lower jpegQuality.
+      const scale = 1.1;
+      const jpegQuality = 0.82; // 0.7-0.85 gives good compression with acceptable quality
+
+      const canvas = await html2canvas(node, {
+        scale,
+        backgroundColor: "#ffffff",
+        useCORS: true,
+      });
+
+      // Convert to JPEG (much smaller than PNG)
+      const imgData = canvas.toDataURL("image/jpeg", jpegQuality);
+
       const pdf = new jsPDF("p", "pt", "a4");
-      const w = pdf.internal.pageSize.getWidth();
-      const h = (canvas.height * w) / canvas.width;
-      pdf.addImage(imgData, "PNG", 0, 0, w, h);
-      pdf.save(`${(contractor.name || "contractor").replace(/\s+/g,"_")}_stub_${period.end || "pay"}.pdf`);
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      const imgWidth = pageWidth;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      if (imgHeight <= pageHeight) {
+        // single page
+        pdf.addImage(imgData, "JPEG", 0, 0, imgWidth, imgHeight);
+      } else {
+        // paginate: slice the canvas vertically into page-sized chunks
+        const scaleForPdf = imgWidth / canvas.width;
+        const sliceHeightPx = Math.floor(pageHeight / scaleForPdf) || canvas.height;
+
+        let y = 0;
+        while (y < canvas.height) {
+          const sliceHeight = Math.min(sliceHeightPx, canvas.height - y);
+          const pageCanvas = document.createElement("canvas");
+          pageCanvas.width = canvas.width;
+          pageCanvas.height = sliceHeight;
+          const ctx = pageCanvas.getContext("2d');
+          if (!ctx) throw new Error("Could not get canvas context for PDF pagination");
+          ctx.drawImage(canvas, 0, y, canvas.width, sliceHeight, 0, 0, canvas.width, sliceHeight);
+          const pageData = pageCanvas.toDataURL("image/jpeg", jpegQuality);
+          if (y > 0) pdf.addPage();
+          const pageImgHeight = (sliceHeight * imgWidth) / canvas.width;
+          pdf.addImage(pageData, "JPEG", 0, 0, imgWidth, pageImgHeight);
+          y += sliceHeight;
+        }
+      }
+
+      const safeName = (contractor.name || "contractor").replace(/\s+/g, "_").replace(/[^\w.-]/g, "");
+      const safeDate = period.end || period.payDate || "pay";
+      pdf.save(`${safeName}_stub_${safeDate}.pdf`);
     } catch (err) {
       console.error(err);
       alert("Failed to export PDF (see console). Make sure images are in /public and same-origin.");
@@ -67,6 +118,7 @@ export default function PayStubApp() {
       setBusy(false);
     }
   };
+  // =========================================================================================
 
   return (
     <div className="container p-6">
