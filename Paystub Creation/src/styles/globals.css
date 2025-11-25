@@ -186,3 +186,45 @@ button.btn-clean, .btn-clean, .export-btn {
 /* small accessibility / focus improvements */
 input:focus, select:focus, textarea:focus, button:focus { outline: 3px solid rgba(14,165,233,0.12); outline-offset:2px; }
 
+
+/* ---------- FIX 1: Paystub Header Logo Size ---------- */
+[role="region"][aria-label="Pay stub preview"] img {
+  height: 48px !important;
+  object-fit: contain;
+}
+
+
+/* ---------- FIX 2: Center Add Button Under Earnings ---------- */
+.card-header .card-title {
+  width: 100%;
+  text-align: center !important;
+}
+
+.card-header > button {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+}
+
+
+/* ---------- FIX 3: Compact Table Header & Row Spacing ---------- */
+[role="region"] table thead th {
+  padding: 8px 6px !important;
+  font-size: 13px !important;
+}
+
+[role="region"] table td {
+  padding: 8px 6px !important;
+}
+
+
+/* ---------- FIX 4: Compact Totals Area ---------- */
+[role="region"] .text-right.mt-4 {
+  margin-top: 8px !important;
+}
+
+[role="region"] .text-lg.font-semibold {
+  font-size: 20px !important;
+  font-weight: 800 !important;
+}
