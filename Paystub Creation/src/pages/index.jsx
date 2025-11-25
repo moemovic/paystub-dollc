@@ -25,6 +25,7 @@ export default function PayStubApp() {
     "CCC Profile",
     "Photo Renaming",
     "Bookkeeping",
+    "Office Administration",
     "Others",
   ];
 
@@ -33,7 +34,7 @@ export default function PayStubApp() {
   const addItem = () =>
     setItems([
       ...items,
-      { id: (Date.now() + Math.random()).toString(36), category: categories[0], qty: 1, rate: 0, miles: 0, note: "" },
+      { id: (Date.now() + Math.random()).toString(36), category: categories[0], qty: 1, rate: 0, miles: 0, note: "", date: "" },
     ]);
 
   const removeItem = (id) => setItems(items.filter((x) => x.id !== id));
@@ -131,6 +132,15 @@ export default function PayStubApp() {
                   {categories.map((c) => (<option key={c}>{c}</option>))}
                 </select>
                 <Input placeholder="Add note..." value={x.note} onChange={(e) => setItems(items.map((i) => (i.id === x.id ? { ...i, note: e.target.value } : i)))} className="mt-2" />
+
+                <Input
+                  type="date"
+                  className="mt-2"
+                  value={x.date}
+                  onChange={(e) =>
+                  setItems(items.map((i) => (i.id === x.id ? { ...i, date: e.target.value } : i)))
+                  }
+                />
               </div>
 
               <Input type="number" placeholder="Qty" value={x.qty} onChange={(e) => setItems(items.map((i) => (i.id === x.id ? { ...i, qty: e.target.value } : i)))} style={{gridColumn:"span 2"}} />
@@ -172,6 +182,7 @@ export default function PayStubApp() {
             <tr>
               <th style={{textAlign:"left"}}>Category</th>
               <th style={{textAlign:"left"}}>Notes</th>
+              <th style={{textAlign:"left"}}>Date</th>
               <th style={{textAlign:"right"}}>Qty</th>
               <th style={{textAlign:"right"}}>Rate</th>
               <th style={{textAlign:"right"}}>Amount</th>
@@ -182,6 +193,7 @@ export default function PayStubApp() {
               <React.Fragment key={x.id}>
                 <tr style={{borderBottom:"1px solid #f1f5f9"}}>
                   <td>{x.category}</td>
+                  <td>{x.date || "—"}</td>
                   <td>{x.note || "—"}</td>
                   <td style={{textAlign:"right"}}>{Number(x.qty || 0)}</td>
                   <td style={{textAlign:"right"}}>${Number(x.rate || 0).toFixed(2)}</td>
