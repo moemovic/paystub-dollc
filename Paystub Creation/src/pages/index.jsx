@@ -159,6 +159,15 @@ export default function PayStubApp() {
           </div>
         </div>
 
+                {/* Office Address Above Pay Stub */}
+        <div className="small mt-2" style={{ marginBottom: 6, lineHeight: "1.3" }}>
+          adjuster@dollcappraisals.com<br/>
+          (502) 422-1901<br/>
+          P O Box 112, Bloomfield, KY 40008-0112
+        </div>
+
+        <h2 className="text-xl font-bold">Pay Stub for {contractor.name || "—"}</h2>
+
         <h2 className="text-xl font-bold mt-2">Pay Stub for {contractor.name || "—"}</h2>
         <table style={{width:"100%", marginTop:8, fontSize:13}}>
           <thead style={{borderBottom:"1px solid #eef2f7", color:"#475569"}}>
