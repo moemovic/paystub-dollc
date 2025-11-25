@@ -34,7 +34,7 @@ export default function PayStubApp() {
   const addItem = () =>
     setItems([
       ...items,
-      { id: (Date.now() + Math.random()).toString(36), category: categories[0], qty: 1, rate: 0, miles: 0, date: "" note: "" },
+      { id: (Date.now() + Math.random()).toString(36), category: categories[0], qty: 1, rate: 0, miles: 0, date: "", note: "" },
     ]);
 
   const removeItem = (id) => setItems(items.filter((x) => x.id !== id));
@@ -131,8 +131,6 @@ export default function PayStubApp() {
                 <select value={x.category} onChange={(e) => setItems(items.map((i) => (i.id === x.id ? { ...i, category: e.target.value } : i)))}>
                   {categories.map((c) => (<option key={c}>{c}</option>))}
                 </select>
-                <Input placeholder="Add note..." value={x.note} onChange={(e) => setItems(items.map((i) => (i.id === x.id ? { ...i, note: e.target.value } : i)))} className="mt-2" />
-
                 <Input
                   type="date"
                   className="mt-2"
@@ -142,6 +140,9 @@ export default function PayStubApp() {
                   }
                 />
               </div>
+                <Input placeholder="Add note..." value={x.note} onChange={(e) => setItems(items.map((i) => (i.id === x.id ? { ...i, note: e.target.value } : i)))} className="mt-2" />
+
+                
 
               <Input type="number" placeholder="Qty" value={x.qty} onChange={(e) => setItems(items.map((i) => (i.id === x.id ? { ...i, qty: e.target.value } : i)))} style={{gridColumn:"span 2"}} />
               <Input type="number" placeholder="Rate" value={x.rate} onChange={(e) => setItems(items.map((i) => (i.id === x.id ? { ...i, rate: e.target.value } : i)))} style={{gridColumn:"span 2"}} />
@@ -181,8 +182,8 @@ export default function PayStubApp() {
           <thead style={{borderBottom:"1px solid #eef2f7", color:"#475569"}}>
             <tr>
               <th style={{textAlign:"left"}}>Category</th>
-              <th style={{textAlign:"left"}}>Notes</th>
               <th style={{textAlign:"left"}}>Date</th>
+              <th style={{textAlign:"left"}}>Notes</th>
               <th style={{textAlign:"right"}}>Qty</th>
               <th style={{textAlign:"right"}}>Rate</th>
               <th style={{textAlign:"right"}}>Amount</th>
