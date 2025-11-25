@@ -99,7 +99,7 @@ export default function PayStubApp() {
         },
       });
 
-      const imgData = canvas.toDataURL("image/jpeg", 0.82);
+      const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "pt", "a4");
       const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
