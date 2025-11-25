@@ -65,7 +65,7 @@ export default function PayStubApp() {
 
     try {
       const canvas = await html2canvas(node, {
-        scale: 2,
+        scale: 1,
         backgroundColor: "#ffffff",
         onclone: (clonedDoc) => {
           try {
@@ -99,7 +99,7 @@ export default function PayStubApp() {
         },
       });
 
-      const imgData = canvas.toDataURL("image/png");
+      const imgData = canvas.toDataURL("image/jpeg", 0.82);
       const pdf = new jsPDF("p", "pt", "a4");
       const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
