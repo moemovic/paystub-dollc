@@ -160,7 +160,7 @@ export default function PayStubApp() {
         </div>
 
                 {/* Office Address Above Pay Stub */}
-        <div className="small mt-2" style={{ marginBottom: 6, lineHeight: "1.3", fontWeight: "700", fontSize: "18px" }}>
+        <div className="small mt-2" style={{ marginBottom: 6, lineHeight: "1.3", fontWeight: "700", fontSize: "17px" }}>
         adjuster@dollcappraisals.com<br/>
         (502) 422-1901<br/>
         P O Box 112, Bloomfield, KY 40008-0112
