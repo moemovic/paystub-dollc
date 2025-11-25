@@ -34,7 +34,7 @@ export default function PayStubApp() {
   const addItem = () =>
     setItems([
       ...items,
-      { id: (Date.now() + Math.random()).toString(36), category: categories[0], qty: 1, rate: 0, miles: 0, note: "", date: "" },
+      { id: (Date.now() + Math.random()).toString(36), category: categories[0], qty: 1, rate: 0, miles: 0, date: "" note: "" },
     ]);
 
   const removeItem = (id) => setItems(items.filter((x) => x.id !== id));
