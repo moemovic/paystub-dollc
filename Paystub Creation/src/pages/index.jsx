@@ -65,7 +65,7 @@ export default function PayStubApp() {
 
     try {
       const canvas = await html2canvas(node, {
-        scale: 1,
+        scale: 1.8,
         backgroundColor: "#ffffff",
         onclone: (clonedDoc) => {
           try {
