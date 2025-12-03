@@ -21,6 +21,7 @@ export default function PayStubApp() {
   const [period, setPeriod] = useState({ start: "", end: "", payDate: "" });
   const [paidVia, setPaidVia] = useState("");
   const [items, setItems] = useState([]);
+  const [ytdText, setYtdText] = useState(""); // <-- plain text box state
 
   const categories = [
     "Photo Capture",
@@ -264,6 +265,22 @@ export default function PayStubApp() {
         </CardContent>
       </Card>
 
+      {/* Plain text Year To Date input - placed right after the Earnings card */}
+      <Card className="mt-2">
+        <CardHeader>
+          <CardTitle>Year To Date</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Label>Year To Date Total</Label>
+          <Input
+            placeholder="Enter text..."
+            value={ytdText}
+            onChange={(e) => setYtdText(e.target.value)}
+          />
+          <div className="small mt-2">Text entered here will appear exactly on the paystub and in the exported PDF.</div>
+        </CardContent>
+      </Card>
+
       <div ref={printableRef} className="card rounded-xl mt-2" style={{ background: "#fff", padding: 16 }}>
         <div className="flex justify-between items-center">
           <img src="/logo.png" alt="logo" style={{ height: 48 }} />
@@ -321,6 +338,11 @@ export default function PayStubApp() {
           <div>Gross Earnings: <strong>${totals.earnings.toFixed(2)}</strong></div>
           <div>+ Mileage: <strong>${totals.mileage.toFixed(2)}</strong></div>
           <div style={{ fontSize: 18, fontWeight: 700 }}>Net Pay: ${totals.total.toFixed(2)}</div>
+
+          {/* Simple render of the plain text YTD value */}
+          <div style={{ marginTop: 10, fontSize: 13 }}>
+            <div><strong>Year To Date Total:</strong> {ytdText || "—"}</div>
+          </div>
         </div>
       </div>
 
