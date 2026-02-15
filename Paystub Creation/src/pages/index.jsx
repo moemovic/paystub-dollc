@@ -151,10 +151,9 @@ export default function PayStubApp() {
   return (
     <div className="container p-6">
       <div className="flex items-center gap-4">
-        <img src="/logo.png" alt="Logo" style={{ height: 56 }} />
+        <img src="/logo.png" alt="Logo" style={{ height: 86 }} />
         <div>
-          <h1 className="text-3xl font-bold">DOLLC Contractor Pay Stub Generator</h1>
-          <p className="small">Relationship built on duty and trust</p>
+          <h1 className="text-3xl font-bold">Pay Stub Generator for Kentucky Auto Damage Appraiser</h1>
         </div>
       </div>
 
