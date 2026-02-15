@@ -151,7 +151,7 @@ export default function PayStubApp() {
   return (
     <div className="container p-6">
       <div className="flex items-center gap-4">
-        <img src="/logo.png" alt="Logo" style={{ height: 86 }} />
+        <img src="/logo.png" alt="Logo" style={{ height: 100 }} />
         <div>
           <h1 className="text-3xl font-bold">Pay Stub Generator for Kentucky Auto Damage Appraiser</h1>
         </div>
@@ -282,7 +282,7 @@ export default function PayStubApp() {
 
       <div ref={printableRef} className="card rounded-xl mt-2" style={{ background: "#fff", padding: 16 }}>
         <div className="flex justify-between items-center">
-          <img src="/logo.png" alt="logo" style={{ height: 48 }} />
+          <img src="/logo.png" alt="logo" style={{ height: 100 }} />
           <div className="text-right small">
             <div>Pay Period: {period.start} - {period.end}</div>
             <div>Pay Date: {period.payDate}</div>
